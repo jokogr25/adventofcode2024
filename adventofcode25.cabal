@@ -26,6 +26,7 @@ source-repository head
 library
   exposed-modules:
       Day1.Day1
+      Day2.Day2
   other-modules:
       Paths_adventofcode25
   autogen-modules:
