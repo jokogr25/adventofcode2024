@@ -38,7 +38,7 @@ checkDirection x y
 
 dayTwoReadFile :: IO [[Int]]
 dayTwoReadFile = do
-  input <- readFile "src/Day2/example.txt"
+  input <- readFile "src/Day2/input.txt"
   return $ map parseLine (lines input)
 
 parseLine :: String -> [Int]
