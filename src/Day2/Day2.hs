@@ -28,7 +28,7 @@ isSafe dir (x : xs : xss)
 -- (x : xs) von der zweiten Liste x ist der erste Wert von der dieser
 isSafe2' :: [Int] -> [Int] -> Bool
 isSafe2' _ [] = False
-isSafe2' x (y : ys) = isSafe2' (x ++ [y]) ys || isSafe Init (x ++ ys)
+isSafe2' x (y : ys) = isSafe Init (x ++ ys) || isSafe2' (x ++ [y]) ys
 
 checkDirection :: Int -> Int -> Direction
 checkDirection x y
