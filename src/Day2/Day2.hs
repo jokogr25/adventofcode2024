@@ -25,11 +25,11 @@ isSafe' (x : xs : xss) = isSafe'' (checkDirection x xs) (x : xs : xss)
     isSafe'' _ [] = False
     isSafe'' _ [_] = True
     isSafe'' dir (x : xs : xss)
-      | isSafeIncDec x xs && checkDirection x xs == dir = isSafe'' (checkDirection x xs) (xs : xss)
+      | isSafeIncDec x xs && checkDirection x xs == dir = isSafe'' dir (xs : xss)
       | otherwise = False
 
 isSafeIncDec :: Int -> Int -> Bool
-isSafeIncDec x y = (abs (x - y) >= 1 && abs (x - y) <= 3)
+isSafeIncDec x y = abs (x - y) >= 1 && abs (x - y) <= 3
 
 {-
 der head der zweiten Liste ist der Wert, der in jedem Durchlauf rausgenommen wird
