@@ -25,7 +25,12 @@ isSafe dir (x : xs : xss)
   | (abs (x - xs) >= 1 && abs (x - xs) <= 3) && checkDirection x xs == dir = isSafe (checkDirection x xs) (xs : xss)
   | otherwise = False
 
--- (x : xs) von der zweiten Liste x ist der erste Wert von der dieser
+{-
+der head der zweiten Liste ist der Wert, der in jedem Durchlauf rausgenommen wird
+in jedem "Durchlauf" wird ein Element entfernt und die Liste ohne dieses Element geprüft
+der "Trick" ist nun: wenn ein Element entfernt wurde, und die nun safe ist, dann ist, haben wir
+den "Fehler" gefunden, und können die Funktion "abbrechen"
+ -}
 isSafe2' :: [Int] -> [Int] -> Bool
 isSafe2' _ [] = False
 isSafe2' x (y : ys) = isSafe Init (x ++ ys) || isSafe2' (x ++ [y]) ys
