@@ -9,7 +9,7 @@ data Direction' = Up' | Down' deriving (Show, Eq)
 part1 :: IO Int
 part1 = do
   input <- dayTwoReadFile
-  length . filter id . map (isSafe') <$> dayTwoReadFile
+  length . filter id . map isSafe' <$> dayTwoReadFile
 
 part2 :: IO Int
 part2 = do
@@ -24,8 +24,8 @@ isSafe' (x : xs : xss) = isSafe'' (checkDirection x xs) (x : xs : xss)
     isSafe'' :: Direction -> [Int] -> Bool
     isSafe'' _ [] = False
     isSafe'' _ [_] = True
-    isSafe'' dir (x : xs : xss)
-      | isSafeIncDec x xs && checkDirection x xs == dir = isSafe'' dir (xs : xss)
+    isSafe'' dir (y : ys : yss)
+      | isSafeIncDec y ys && checkDirection y ys == dir = isSafe'' dir (ys : yss)
       | otherwise = False
 
 isSafeIncDec :: Int -> Int -> Bool
