@@ -9,23 +9,23 @@ data Direction' = Up' | Down' deriving (Show, Eq)
 part1 :: IO Int
 part1 = do
   input <- dayTwoReadFile
-  length . filter id . map isSafe' <$> dayTwoReadFile
+  length . filter id . map isSafe <$> dayTwoReadFile
 
 part2 :: IO Int
 part2 = do
   input <- dayTwoReadFile
   length . filter id . map (isSafe2 []) <$> dayTwoReadFile
 
-isSafe' :: [Int] -> Bool
-isSafe' [] = False
-isSafe' [_] = False
-isSafe' (x : xs : xss) = isSafe'' (checkDirection x xs) (x : xs : xss)
+isSafe :: [Int] -> Bool
+isSafe [] = False
+isSafe [_] = False
+isSafe (x : xs : xss) = isSafe' (checkDirection x xs) (x : xs : xss)
   where
-    isSafe'' :: Direction -> [Int] -> Bool
-    isSafe'' _ [] = False
-    isSafe'' _ [_] = True
-    isSafe'' dir (y : ys : yss)
-      | isSafeIncDec y ys && checkDirection y ys == dir = isSafe'' dir (ys : yss)
+    isSafe' :: Direction -> [Int] -> Bool
+    isSafe' _ [] = False
+    isSafe' _ [_] = True
+    isSafe' dir (y : ys : yss)
+      | isSafeIncDec y ys && checkDirection y ys == dir = isSafe' dir (ys : yss)
       | otherwise = False
 
 isSafeIncDec :: Int -> Int -> Bool
@@ -39,7 +39,7 @@ den "Fehler" (es muss nicht der Fehler sein, der rausgenommen wurde) gefunden, u
  -}
 isSafe2 :: [Int] -> [Int] -> Bool
 isSafe2 _ [] = False
-isSafe2 x (y : ys) = isSafe' (x ++ ys) || isSafe2 (x ++ [y]) ys
+isSafe2 x (y : ys) = isSafe (x ++ ys) || isSafe2 (x ++ [y]) ys
 
 checkDirection :: Int -> Int -> Direction
 checkDirection x y
