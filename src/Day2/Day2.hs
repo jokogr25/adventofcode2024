@@ -4,8 +4,6 @@ module Day2.Day2 (part1, part2) where
 
 data Direction = Up | Down | Plateau deriving (Show, Eq)
 
-data Direction' = Up' | Down' deriving (Show, Eq)
-
 part1 :: IO Int
 part1 = do
   input <- dayTwoReadFile
