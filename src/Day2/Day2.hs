@@ -2,7 +2,7 @@
 
 module Day2.Day2 (part1, part2) where
 
-data Direction = Up | Down | None deriving (Show, Eq)
+data Direction = Up | Down | Plateau deriving (Show, Eq)
 
 data Direction' = Up' | Down' deriving (Show, Eq)
 
@@ -45,7 +45,7 @@ checkDirection :: Int -> Int -> Direction
 checkDirection x y
   | x < y = Up
   | x > y = Down
-  | otherwise = None
+  | otherwise = Plateau
 
 dayTwoReadFile :: IO [[Int]]
 dayTwoReadFile = do
