@@ -17,6 +17,7 @@ part2 = do
 isSafe :: [Int] -> Bool
 isSafe [] = False
 isSafe [_] = False
+isSafe [x, xs] = isSafeIncDec x xs
 isSafe (x : xs : xss) = isSafe' (checkDirection x xs) (x : xs : xss)
   where
     isSafe' :: Direction -> [Int] -> Bool
