@@ -12,7 +12,7 @@ part1 = do
 part2 :: IO Int
 part2 = do
   input <- dayTwoReadFile
-  length . filter id . map (isSafe2 []) <$> dayTwoReadFile
+  length . filter id . map isSafe2 <$> dayTwoReadFile
 
 isSafe :: [Int] -> Bool
 isSafe [] = False
@@ -48,9 +48,13 @@ in jedem "Durchlauf" wird ein Element entfernt und die Liste ohne dieses Element
 der "Trick" ist nun: wenn ein Element entfernt wurde, und die nun Liste nun sicher ist, haben wir
 den "Fehler" (es muss nicht der Fehler sein, der rausgenommen wurde) gefunden, und können die Funktion "abbrechen" - das geschieht durch das || in der Rekursion wo die eigentliche Prüfung vorne geschieht
  -}
-isSafe2 :: [Int] -> [Int] -> Bool
-isSafe2 _ [] = False
-isSafe2 x (y : ys) = isSafe (x ++ ys) || isSafe2 (x ++ [y]) ys
+isSafe2 :: [Int] -> Bool
+isSafe2 [x] = True
+isSafe2 [x, xs] = isSafeIncDec x xs
+isSafe2 xs = isSafe2' [] xs
+  where
+    isSafe2' _ [] = False
+    isSafe2' x (y : ys) = isSafe (x ++ ys) || isSafe2' (x ++ [y]) ys
 
 checkDirection :: Int -> Int -> Direction
 checkDirection x y
@@ -65,12 +69,3 @@ dayTwoReadFile = do
 
 parseLine :: String -> [Int]
 parseLine line = map read $ words line
-
--- isSafe :: Direction -> [Int] -> Bool
--- isSafe _ [] = False
--- isSafe _ [_] = True
--- isSafe dir (x : xs : xss)
---   | dir == Init = isSafe (checkDirection x xs) (x : xs : xss)
---   | dir == None = False
---   | (abs (x - xs) >= 1 && abs (x - xs) <= 3) && checkDirection x xs == dir = isSafe (checkDirection x xs) (xs : xss)
---   | otherwise = False
