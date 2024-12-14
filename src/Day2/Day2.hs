@@ -30,6 +30,18 @@ isSafe (x : xs : xss) = isSafe' (checkDirection x xs) (x : xs : xss)
 isSafeIncDec :: Int -> Int -> Bool
 isSafeIncDec x y = abs (x - y) >= 1 && abs (x - y) <= 3
 
+isSafe'' :: [Int] -> Bool
+isSafe'' [] = False
+isSafe'' [x, xs] = isSafeIncDec x xs
+isSafe'' xs =
+  and (f isSafeInc) || and (f isSafeDec)
+  where
+    f g = foldl (\a (b, bs) -> a ++ [g b bs]) [] (zip xs (tail xs))
+
+    isSafeInc x y = (y - x) >= 1 && (y - x) <= 3
+
+    isSafeDec x y = (x - y) >= 1 && (x - y) <= 3
+
 {-
 der head der zweiten Liste ist der Wert, der in jedem Durchlauf rausgenommen wird
 in jedem "Durchlauf" wird ein Element entfernt und die Liste ohne dieses Element geprüft
