@@ -3,7 +3,7 @@ version: 0.1.0.0
 github: "githubuser/adventofcode25"
 license: BSD-3-Clause
 author: "Joscha Konstantin Groth"
-maintainer: "jokogr+mailbox.org"
+maintainer: "jokogr@mailbox.org"
 copyright: "2024 Joscha Konstantin Groth"
 
 extra-source-files:
@@ -21,6 +21,7 @@ description: Please see the README on GitHub at <https://github.com/githubuser/a
 
 dependencies:
   - base >= 4.7 && < 5
+  - regex-tdfa
   - containers
 
 ghc-options:
