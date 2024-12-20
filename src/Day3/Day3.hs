@@ -6,7 +6,7 @@ part1 :: IO Int
 part1 = do
   input <- dayThreeReadFile
   print input
-  print (getAllTextMatches (input =~ regex) :: [String])
+  mapM_ print (getAllTextMatches (input =~ regex) :: [String])
   print (input =~ regex :: Bool)
   return 0
 
