@@ -5,14 +5,14 @@ import Text.Regex.TDFA
 part1 :: IO Int
 part1 = do
   input <- dayThreeReadFile
-  print input
-  print (input =~ regex :: Bool)
-  mapM_ print (getAllTextMatches (input =~ regex) :: [String])
-  return 0
+  return
+    ( sum
+        (map (product . f) (getAllTextMatches (input =~ "mul\\([0-9]{1,3},[0-9]{1,3}\\)") :: [String]))
+    )
 
-regex :: String
-regex = "mul\\([0-9]{1,3},[0-9]{1,3}\\)"
+f :: String -> [Int]
+f x = map read (getAllTextMatches (x =~ "[0-9]{1,3}") :: [String])
 
 dayThreeReadFile :: IO String
 dayThreeReadFile = do
-  readFile "src/Day3/example.txt"
+  readFile "src/Day3/input.txt"
