@@ -2,7 +2,7 @@ module Main (main) where
 
 import qualified Day1.Day1 as Day1 (part1, part2)
 import qualified Day2.Day2 as Day2 (part1, part2)
-import qualified Day3.Day3 as Day3 (part1)
+import qualified Day3.Day3 as Day3 (part1, part2)
 
 main :: IO ()
 main = do
@@ -19,6 +19,9 @@ main = do
   print ("Day2 - Part 2: " ++ show day2part2)
 
   day3part1 <- Day3.part1
-  print ("Day3 - Part 3: " ++ show day3part1)
+  print ("Day3 - Part 1: " ++ show day3part1)
+
+  day3part2 <- Day3.part2
+  print ("Day3 - Part 2: " ++ show day3part2)
 
   return ()
