@@ -21,14 +21,17 @@ part2 = do
     )
 
 checkCheck :: [String] -> [String]
-checkCheck list = check Do list []
+checkCheck = check Do
   where
-    check :: Dontnod -> [String] -> [String] -> [String]
-    check _ [] x = x
-    check dontnod (x : xs) l
-      | x == "do()" = check Do xs l
-      | x == "don't()" = check Dont xs l
-      | otherwise = if dontnod == Do then check Do xs (x : l) else check Dont xs l
+    check :: Dontnod -> [String] -> [String]
+    check _ [] = []
+    check dontnod (x : xs)
+      | x == "do()" = check Do xs
+      | x == "don't()" = check Dont xs
+      | otherwise =
+          if dontnod == Do
+            then x : check Do xs
+            else check Dont xs
 
 regexPart2 :: String
 regexPart2 = "mul\\([0-9]{1,3},[0-9]{1,3}\\)|do\\(\\)|don't\\(\\)"
