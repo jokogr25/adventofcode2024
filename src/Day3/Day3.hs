@@ -2,7 +2,7 @@ module Day3.Day3 (part1, part2) where
 
 import Text.Regex.TDFA
 
-data Dontnod = Do | Dont deriving (Show, Eq)
+data Gather = Keep | Ditch deriving (Show, Eq)
 
 part1 :: IO Int
 part1 = do
@@ -21,17 +21,17 @@ part2 = do
     )
 
 checkCheck :: [String] -> [String]
-checkCheck = check Do
+checkCheck = check Keep
   where
-    check :: Dontnod -> [String] -> [String]
+    check :: Gather -> [String] -> [String]
     check _ [] = []
-    check dontnod (x : xs)
-      | x == "do()" = check Do xs
-      | x == "don't()" = check Dont xs
+    check gather (x : xs)
+      | x == "do()" = check Keep xs
+      | x == "don't()" = check Ditch xs
       | otherwise =
-          if dontnod == Do
-            then x : check Do xs
-            else check Dont xs
+          if gather == Keep
+            then x : check Keep xs
+            else check Ditch xs
 
 regexPart2 :: String
 regexPart2 = "mul\\([0-9]{1,3},[0-9]{1,3}\\)|do\\(\\)|don't\\(\\)"
